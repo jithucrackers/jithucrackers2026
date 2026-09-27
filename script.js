@@ -91,6 +91,19 @@ function showModal() {
 
 function closeModal() { document.getElementById('checkoutModal').style.display = "none"; }
 
+function shareStoreOnWhatsApp() {
+    const siteUrl = window.location.href;
+    const promoText =
+        `🎉 *JITHU CRACKERS - Sivakasi* 🎉
+💥 நேரடி தொழிற்சாலை விலையில் Flat 75% தள்ளுபடி!
+👉 இப்போதே ஆர்டர் செய்யுங்கள்: ${siteUrl}
+
+📞 தொடர்பு: 9952732777 / 8220693192`;
+
+    const shareUrl = "https://wa.me/?text=" + encodeURIComponent(promoText);
+    window.open(shareUrl, "_blank");
+}
+
 function generateOrderId() {
     const now = new Date();
     const datePart = now.getFullYear().toString() +
