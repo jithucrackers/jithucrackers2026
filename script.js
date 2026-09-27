@@ -174,7 +174,7 @@ ${waItemsList}
 _(Please share your payment screenshot here.)_`;
 
     // HIGHLIGHTED EMAIL MESSAGE
-    const recipientEmail = "swathijayabalraj@gmail.com";
+    const recipientEmail = "praveen07cracker@gmail.com";
     const mailSubject = `New Order: ${orderId} - ${name} (₹${grandTotal.toLocaleString('en-IN')})`;
 
     const mailBody =
@@ -214,7 +214,7 @@ G-Pay / PhonePe: 9952732777, 8220693192
     // DISPATCH LOGIC
     // ==========================================
     if (type === 'whatsapp') {
-        const waUrl = "https://wa.me/916369421717?text=" + encodeURIComponent(waMessage);
+        const waUrl = "https://wa.me/919952732777?text=" + encodeURIComponent(waMessage);
         window.open(waUrl, "_blank");
     }
     else if (type === 'email') {
