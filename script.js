@@ -26,6 +26,7 @@ function renderProducts(data) {
         items.forEach(item => {
             const displayMrp = Math.round(parseFloat(item.MRP.replace(/[₹,]/g, '')));
             const displayRate = Math.round(parseFloat(item.Rate.replace(/[₹,]/g, '')));
+            const cleanName = item.Product.replace(/'/g, "\\'");
 
             html += `
                 <div class="product-row">
@@ -40,14 +41,28 @@ function renderProducts(data) {
                     </div>
                     <div class="p-action">
                         <div class="item-subtotal" id="subtotal-${item.SKU}">₹0</div>
-                        <input type="number" class="qty-input" min="0" placeholder="0" 
-                        oninput="updateCart('${item.SKU}', this.value, '${item.Product}', ${displayRate})">
+                        <div class="qty-control">
+                            <button type="button" class="qty-btn minus" onclick="changeQty('${item.SKU}', -1, '${cleanName}', ${displayRate})">-</button>
+                            <input type="number" id="qty-${item.SKU}" class="qty-input" min="0" value="0" 
+                                oninput="updateCart('${item.SKU}', this.value, '${cleanName}', ${displayRate})">
+                            <button type="button" class="qty-btn plus" onclick="changeQty('${item.SKU}', 1, '${cleanName}', ${displayRate})">+</button>
+                        </div>
                     </div>
                 </div>`;
         });
     });
     listDiv.innerHTML = html;
 }
+
+// Helper to handle +/- button clicks
+function changeQty(sku, change, name, rate) {
+    const input = document.getElementById(`qty-${sku}`);
+    let currentQty = parseInt(input.value) || 0;
+    currentQty = Math.max(0, currentQty + change);
+    input.value = currentQty;
+    updateCart(sku, currentQty, name, rate);
+}
+
 
 function updateCart(sku, qty, name, rate) {
     qty = parseInt(qty) || 0;
@@ -170,8 +185,15 @@ ${waItemsList}
 • *Total Quantity:* ${totalQty} items
 • *GRAND TOTAL:* *₹${grandTotal.toLocaleString('en-IN')}*
 --------------------------------------
-*PAYMENT STATUS:* Awaiting Confirmation
-_(Please share your payment screenshot here.)_`;
+*PAYMENT DETAILS:*
+• *G-Pay / PhonePe:* 9952732777, 8220693192
+• *Bank:* State Bank of India
+• *A/c Name:* K Praveenkumar
+• *A/c No:* 31492853796
+• *IFSC:* SBIN0012767
+• *Branch:* Thiruthangal
+--------------------------------------
+Please share your payment screenshot here after completing payment.`;
 
     // HIGHLIGHTED EMAIL MESSAGE
     const recipientEmail = "praveen07cracker@gmail.com";
@@ -205,10 +227,17 @@ Total Items Count : ${totalQty}
 GRAND TOTAL       : Rs. ${grandTotal.toLocaleString('en-IN')}
 
 ==================================================
-PAYMENT DETAILS (FOR VERIFICATION):
-State Bank of India | A/c: 31492853796 | IFSC: SBIN0012767
-G-Pay / PhonePe: 9952732777, 8220693192
-==================================================`;
+PAYMENT DETAILS (TRANSFER TO CONFIRM):
+==================================================
+• G-Pay or PhonePe : 9952732777, 8220693192
+• Bank Name        : State Bank of India
+• A/c Name         : K Praveenkumar
+• A/c Number       : 31492853796
+• Branch           : Thiruthangal
+• IFSC Code        : SBIN0012767
+• MICR Code        : 626002025
+==================================================
+Note: Please reply with your payment screenshot once paid.`;
 
     // ==========================================
     // DISPATCH LOGIC
