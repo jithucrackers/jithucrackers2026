@@ -21,3 +21,19 @@ HTML5: Semantic structure.
 CSS3: Custom Flexbox and Grid layouts with mobile-safe UI components.
 JavaScript (Vanilla): Data fetching, state management, and rounding logic.
 JSON: Product catalog storage.
+
+⚙️ How to Update Products : 
+To change prices or add new products, simply edit the products.json file. The website will automatically update the catalog and apply the visual formatting.
+JSON Structure : 
+{
+    "#": "1",
+    "SKU": "CK-0486",
+    "Product": "10 Wala",
+    "Brand": "Crackerskart",
+    "Category": "Bijili & Lakshmi Crackers",
+    "MRP": "₹20",
+    "Disc %": "75%",
+    "Rate": "₹5"
+}
+
+Developed with ❤️ for Jithu Crackers.
