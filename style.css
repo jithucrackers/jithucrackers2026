@@ -327,3 +327,56 @@ textarea:valid {
 #checkoutModal button:active {
     transform: scale(0.98);
 }
+
+/* Quantity Stepper (+ / -) Styling */
+.qty-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.qty-btn {
+    width: 32px;
+    height: 38px;
+    background: #e0e0e0;
+    color: #333;
+    border: 1px solid #ccc;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.qty-btn:active {
+    background: #b30000;
+    color: #fff;
+    transform: scale(0.92);
+}
+
+.qty-input {
+    width: 48px;
+    height: 38px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #b30000;
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+/* Hide native number input arrows */
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
