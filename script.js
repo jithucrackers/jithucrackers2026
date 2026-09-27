@@ -93,12 +93,32 @@ function closeModal() { document.getElementById('checkoutModal').style.display =
 
 function shareStoreOnWhatsApp() {
     const siteUrl = window.location.href;
-    const promoText =
-        ` *JITHU CRACKERS - Sivakasi* 
- நேரடி தொழிற்சாலை விலையில் Flat 75% தள்ளுபடி!
- இப்போதே ஆர்டர் செய்யுங்கள்: ${siteUrl}
 
- தொடர்பு: 9952732777 / 8220693192`;
+    const promoText =
+        ` *JITHU CRACKERS-க்கு அன்புடன் வரவேற்கிறோம்!* 
+QUALITY • QUANTITY • TRUST | Sivakasi
+
+✅ நேரடி தொழிற்சாலை விலையில்
+✅ அனைத்து பொருட்களுக்கும் Flat 75% தள்ளுபடி 
+ *இப்போதே ஆர்டர் செய்ய:* ${siteUrl}
+
+ *குறைந்தபட்ச ஆர்டர்:* ₹3,000 (தள்ளுபடிக்குப் பிறகு)
+
+ *ஆர்டர் இறுதி நாட்கள்:*
+• மற்ற மாநிலங்கள்: 20 அக்டோபர் 2026
+• தமிழ்நாடு & கர்நாடகா: 02 நவம்பர் 2026
+
+ பொருட்கள் இருப்பு மற்றும் கிடைக்கும் தன்மைக்கு ஏற்ப மாறக்கூடும்.
+ டெலிவரி கட்டணம் தனியாக வசூலிக்கப்படும் (Lorry Freight).
+
+ *கடைசி தேதி வரை காத்திருக்க வேண்டாம்!*
+கடைசி நேர டெலிவரி சிரமங்களைத் தவிர்க்க, இன்றே உங்கள் ஆர்டரை பதிவு செய்யுங்கள்.
+
+ *இந்த சிறப்பு சலுகையை தவறவிடாதீர்கள்!*
+உங்கள் நண்பர்கள் மற்றும் உறவினர்களுக்கும் *JITHU CRACKERS*-ஐ பகிர்ந்து, ஸ்டாக் தீரும் முன் முந்துங்கள்! 
+
+ *Phone / G-Pay:* +91 99527 32777, +91 82206 93192
+ *WhatsApp:* https://wa.me/919952732777`;
 
     const shareUrl = "https://wa.me/?text=" + encodeURIComponent(promoText);
     window.open(shareUrl, "_blank");
