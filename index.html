@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JITHU CRACKERS | Sivakasi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <img src="logo.png" alt="Logo" class="shop-logo">
+            <h1>JITHU CRACKERS</h1>
+            <p class="motto">QUALITY • QUANTITY • TRUST</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Customer Details Section -->
+        <div class="customer-section">
+    <div class="form-grid">
+        <div class="input-group">
+            <input type="text" id="custName" placeholder="Your Name *" required minlength="3">
+            <small class="error-msg">Name must be at least 3 letters</small>
+        </div>
+        
+        <div class="input-group">
+            <input type="tel" id="custPhone" placeholder="10-Digit WhatsApp Number *" required pattern="[0-9]{10}">
+            <small class="error-msg">Enter a valid 10-digit number</small>
+        </div>
+
+        <div class="input-group">
+            <input type="email" id="custEmail" placeholder="Email Address *" required>
+            <small class="error-msg">Enter a valid email address</small>
+        </div>
+
+        <div class="input-group full-width">
+            <textarea id="custAddress" placeholder="Full Address *" rows="2" required minlength="10"></textarea>
+            <small class="error-msg">Please provide a detailed address</small>
+        </div>
+    </div>
+</div>
+
+        <!-- Horizontal Scroll Categories -->
+        <nav id="category-nav" class="category-nav"></nav>
+
+        <!-- Product List -->
+        <div id="product-list"></div>
+    </div>
+
+    <!-- Sticky Cart Footer -->
+    <div class="cart-bar">
+        <div class="cart-container">
+            <div class="cart-left">
+                <span id="itemCount">0</span> Items | <span class="total-display">₹<span id="netTotal">0</span></span>
+            </div>
+            <button class="checkout-btn" onclick="showModal()">ORDER NOW</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeModal()" style="float:right; cursor:pointer; font-size: 24px;">&times;</span>
+            <h3 style="color:#b30000">Confirm Order</h3>
+
+            <div class="payment-box">
+                <strong class="payment-details">Payment Details:</strong><br>
+                <strong>G-Pay or PhonePe:</strong> 9952732777, 8220693192<br>
+                <strong>Bank:</strong> State Bank of India<br>
+                <strong>A/c name:</strong> K Praveenkumar<br>
+                <strong>A/c No.:</strong> 31492853796<br>
+                <strong>Branch:</strong> Thiruthangal<br>
+                <strong>IFSC:</strong> SBIN0012767<br>
+                <strong>MICR:</strong> 626002025
+            </div>
+
+            <!-- 1. WhatsApp Button -->
+            <button onclick="submitOrder('whatsapp')" class="checkout-btn"
+                style="width:100%; margin-bottom:10px; padding:15px;">
+                SEND VIA WHATSAPP
+            </button>
+
+            <!-- 2. Email Button (Now Fixed) -->
+            <button onclick="submitOrder('email')"
+                style="width:100%; background:#444; color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; cursor:pointer; margin-bottom:10px;">
+                SEND VIA EMAIL
+            </button>
+
+            <!-- 3. NEW: Download JSON Button -->
+            <button onclick="submitOrder('save_json')"
+                style="width:100%; background:#007bff; color:white; border:none; padding:10px; border-radius:10px; font-weight:bold; cursor:pointer; font-size: 12px;">
+                DOWNLOAD ORDER JSON (FOR RECORDS)
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
