@@ -6,30 +6,68 @@
 
 .top-share-bar {
     background: #111;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     padding: 8px 12px;
-    border-bottom: 1px solid #333;
+    flex-wrap: wrap;
 }
 
 .share-btn-top {
     background: #25D366;
     color: #fff;
     border: none;
-    padding: 8px 18px;
+    padding: 8px 14px;
     border-radius: 20px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
     cursor: pointer;
+    text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, background 0.2s;
+    gap: 5px;
 }
 
 .share-btn-top:active {
     transform: scale(0.96);
     background: #1eb854;
+}
+
+.pricelist-btn-top {
+    background: #ffce00;
+    color: #111;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* If using Option 2 (Inside Header) */
+.download-pricelist-btn {
+    display: inline-block;
+    background: #ffce00;
+    color: #111;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.15s ease;
+}
+
+.download-pricelist-btn:active,
+.pricelist-btn-top:active {
+    transform: scale(0.95);
 }
 
 body {
