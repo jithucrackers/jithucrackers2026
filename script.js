@@ -306,9 +306,7 @@ Note: Please reply with your payment screenshot once paid.`;
         channel: type.toUpperCase()
     });
 
-    // ==========================================
     // DISPATCH LOGIC
-    // ==========================================
     if (type === 'whatsapp') {
         const waUrl = "https://wa.me/919952732777?text=" + encodeURIComponent(waMessage);
         window.open(waUrl, "_blank");
@@ -329,20 +327,5 @@ Note: Please reply with your payment screenshot once paid.`;
             const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipientEmail}&su=${encodedSubject}&body=${encodedBody}`;
             window.open(gmailWebUrl, '_blank');
         }
-    }
-    else if (type === 'save_json') {
-        const fullOrder = {
-            orderID: orderId,
-            date: orderDate,
-            customer: { name, phone, email, address },
-            items: cart,
-            totalQuantity: totalQty,
-            grandTotal: grandTotal
-        };
-        const blob = new Blob([JSON.stringify(fullOrder, null, 2)], { type: 'application/json' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `Order_${orderId}_${name.replace(/\s+/g, '_')}.json`;
-        a.click();
     }
 }
