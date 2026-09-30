@@ -1,6 +1,7 @@
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz8cWR8RUalP-uTdn2CwIIQLAW8uF7zU5WvHT9Si0Acw26u-mzVx5gCEr8JX1HewDKtYQ/exec";
 
 let cart = {};
+let currentOrderId = null;
 
 fetch('products.json')
     .then(res => res.json())
@@ -65,9 +66,9 @@ function changeQty(sku, change, name, rate) {
     updateCart(sku, currentQty, name, rate);
 }
 
-
 function updateCart(sku, qty, name, rate) {
     qty = parseInt(qty) || 0;
+    if (qty < 0) qty = 0;
     const itemTotal = qty * rate;
     document.getElementById(`subtotal-${sku}`).innerText = `₹${itemTotal}`;
     if (qty > 0) cart[sku] = { name, rate, qty, total: itemTotal };
@@ -88,6 +89,12 @@ function showModal() {
         alert("Please select at least one item before ordering.");
         return;
     }
+
+    // Generate Order ID ONCE when the modal opens if it doesn't already exist
+    if (!currentOrderId) {
+        currentOrderId = generateOrderId();
+    }
+
     document.getElementById('checkoutModal').style.display = "block";
 }
 
@@ -141,7 +148,8 @@ function generateOrderId() {
 }
 
 function saveOrderToGoogleSheets(payload) {
-    // Uses mode: 'no-cors' so browser doesn't block cross-origin requests to Google
+    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("YOUR_SCRIPT_ID_HERE")) return;
+
     fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
@@ -167,7 +175,6 @@ function submitOrder(type) {
         else if (!phoneEl.checkValidity()) phoneEl.focus();
         else if (!emailEl.checkValidity()) emailEl.focus();
         else if (!addressEl.checkValidity()) addressEl.focus();
-
         return;
     }
 
@@ -182,7 +189,11 @@ function submitOrder(type) {
         return;
     }
 
-    const orderId = generateOrderId();
+    if (!currentOrderId) {
+        currentOrderId = generateOrderId();
+    }
+    const orderId = currentOrderId;
+
     const orderDate = new Date().toLocaleString('en-IN', {
         dateStyle: 'medium',
         timeStyle: 'short'
@@ -286,7 +297,7 @@ PAYMENT DETAILS (TRANSFER TO CONFIRM):
 ==================================================
 Note: Please reply with your payment screenshot once paid.`;
 
-// Prepare flattened items summary for a single sheet cell
+    // Prepare flattened items summary for a single sheet cell
     let itemsSummary = [];
     for (let sku in cart) {
         itemsSummary.push(`${cart[sku].name} [${sku}] x ${cart[sku].qty} (₹${cart[sku].total})`);
