@@ -1,3 +1,5 @@
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz8cWR8RUalP-uTdn2CwIIQLAW8uF7zU5WvHT9Si0Acw26u-mzVx5gCEr8JX1HewDKtYQ/exec";
+
 let cart = {};
 
 fetch('products.json')
@@ -138,6 +140,18 @@ function generateOrderId() {
     return datePart + "-" + timePart;
 }
 
+function saveOrderToGoogleSheets(payload) {
+    // Uses mode: 'no-cors' so browser doesn't block cross-origin requests to Google
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    }).catch(err => console.error("Error logging to Google Sheets:", err));
+}
+
 function submitOrder(type) {
     const nameEl = document.getElementById('custName');
     const phoneEl = document.getElementById('custPhone');
@@ -271,6 +285,26 @@ PAYMENT DETAILS (TRANSFER TO CONFIRM):
 • MICR Code        : 626002025
 ==================================================
 Note: Please reply with your payment screenshot once paid.`;
+
+// Prepare flattened items summary for a single sheet cell
+    let itemsSummary = [];
+    for (let sku in cart) {
+        itemsSummary.push(`${cart[sku].name} [${sku}] x ${cart[sku].qty} (₹${cart[sku].total})`);
+    }
+
+    // Send data to Google Sheets
+    saveOrderToGoogleSheets({
+        orderID: orderId,
+        orderDate: orderDate,
+        name: name,
+        phone: phone,
+        email: email,
+        address: address,
+        totalQty: totalQty,
+        grandTotal: grandTotal,
+        itemsSummary: itemsSummary.join(" | "),
+        channel: type.toUpperCase()
+    });
 
     // ==========================================
     // DISPATCH LOGIC
